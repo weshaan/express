@@ -26,8 +26,14 @@ const books = [
   ]
 
 router.get('/', (request, response) => {
-    console.log(request.query)
-    response.send(books)
+    const {quantity} = request.query;
+    const parsedQuantity=parseInt(quantity);
+    if(!isNaN(parsedQuantity)){
+    console.log(request.query);
+    response.send(books.filter(book => book.quantity <= parsedQuantity));
+}else{
+    console.log(request.query);
+    response.send(books);}
 })
 
 router.get('/:item',(request,response) => {
