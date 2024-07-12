@@ -39,8 +39,11 @@ router.get('/', (request, response) => {
 router.get('/:item',(request,response) => {
   const item = request.params.item
   const book = books.find((book) => book.item === item)
+  response.cookie('picked a book',true,{
+    maxAge: 10000,
+  });
   response.send(book)
-  })
+  });
 
 router.post('/', (request, response) => {
     console.log("request.body")
