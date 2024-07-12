@@ -1,6 +1,12 @@
-const {Router} = require('express');
+const {Router, response} = require('express');
+const session = require('express-session')
 
 const router = Router();
+router.use(session({
+  secret: 'uwejuewimwniuenownfwonfownwo',
+  resave: false,
+  saveUninitialized: true,
+  }));
 
 const books = [
     {
@@ -50,6 +56,28 @@ router.post('/', (request, response) => {
     console.log(request.body)
     books.push(request.body)
     response.send(201)
+})
+
+router.get('/buy/list',(request,response) => { 
+  const {list} = request.session;
+  if(!list){
+    response.send('Empty list')
+  }else{
+    response.send(list)
+  }
+})
+router.post('/buy/list',(request,response) => {
+  const {item,quantity} = request.body;
+  const listitem = {item,quantity};
+  const {list} = request.session;
+  if(list){
+    request.session.list.items.push(listitem);
+  }else{
+    request.session.list = {items:[listitem]}
+  }
+  // console.log(listitem);
+  // books.push(listitem);
+   response.send(201);
 })
 
 module.exports = router;
