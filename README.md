@@ -30,7 +30,6 @@ This project is a simple Express.js server that provides an API for managing a c
     ```
 2. The server will be running on port 3000. You can access the API endpoints using a tool like Postman or your web browser.
 
-
 ### Get All Books
 
 - **URL:** `/api`
@@ -49,6 +48,23 @@ This project is a simple Express.js server that provides an API for managing a c
 - **Method:** `POST`
 - **Description:** Adds a new book to the collection.
 - **Response:** `201 Created`
+
+### Get Purchase List
+
+- **URL:** `/api/buy/list`
+- **Method:** `GET`
+- **Description:** Retrieves the current list of items to be purchased. If the list is empty, returns a message indicating the list is empty.
+
+### Add to Purchase List
+
+- **URL:** `/api/buy/list`
+- **Method:** `POST`
+- **Description:** Adds an item to the purchase list.
+- **Request Body:**
+  - `item` (string): The name of the item to add.
+  - `quantity` (number): The quantity of the item to add.
+- **Response:** `201 Created`
+
 
 ### Note that this is a very basic implementation and lacks error handling and security measures that a real-world application would require.
 ## Thank you.
