@@ -7,6 +7,11 @@ router.use(session({
   resave: false,
   saveUninitialized: true,
   }));
+  
+// router.use((req,res,next) =>{
+//     if(req.session.user) next();
+//     else {res.send(401);}
+// })
 
 const books = [
     {
