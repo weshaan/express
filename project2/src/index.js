@@ -2,6 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const todosRouter = require('./routes/todos');
+require('./database');
 const PORT = 3000
 
 const app = express();
