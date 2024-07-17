@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Date_format, Params, todos } = require('../database/todos');
+const Task = require('../database/tasks')
 
 router.get('/', (req, res) =>{
     const { status, priority, category, search_q } = req.query;
@@ -41,7 +42,12 @@ router.get('/agenda', (req, res) =>{
 router.post('/', Params, (req, res) =>{
     const { id, todo, category, priority, status, dueDate } = req.body;
     todos.push({ id, todo, category, priority, status, dueDate: Date_format(dueDate) });
-    res.send('Todo Successfully Added');
+    const task = new Task({id, todo, category, priority, status, dueDate});
+        task.save()
+        .then(() => {
+            res.send('Todo Successfully Added');
+        })
+    
 });
 
 router.put('/:todoId', Params, (req, res) =>{
